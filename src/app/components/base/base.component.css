@@ -1,0 +1,28 @@
+.tablecell {
+    background-color: black;
+    height: 100%;
+    padding: 0.5em 0em;
+    min-width: 160px;
+    max-width: 160px;
+    vertical-align: middle;
+    display: table-cell;
+    text-decoration: none;
+}
+
+.firstColumn {
+    min-width: 2em;
+    max-width: 4em;
+    display: table-cell;
+}
+
+.firstRow {
+    min-width: 160px;
+    max-width: 160px;
+    display: table-cell;
+}
+
+.wrapper {
+    overflow-x: scroll; 
+    overflow-y: hidden; 
+    white-space: nowrap;
+}

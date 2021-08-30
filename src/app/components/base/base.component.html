@@ -1,0 +1,100 @@
+<div class="rounded p-2" style="background-color: lightsalmon;">
+    <h2>Table text editor</h2>
+    <div class="row">
+        <form (ngSubmit)="createArray()">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label">Rows</label>
+                </div>
+                <div class="col-md-1">
+                    <input type="number" min="1" [(ngModel)]="rows" name="rows" class="form-control">
+                </div>
+                <div class="col-auto">
+                    <label class="col-form-label">Columns</label>
+                </div>
+                <div class="col-md-1">
+                    <input type="number" min="1" [(ngModel)]="cols" name="cols" class="form-control">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="wrapper row pt-2">
+        <div *ngFor="let rowA of array; let i = index" class="">
+            <div *ngFor="let colA of rowA; let j = index" class="d-inline-block mw-100 px-1">
+
+                <div *ngIf="i ==0 || j == 0">
+                    <div [ngClass]="{'firstColumn': j == 0,
+                                     'firstRow': i==0 && j > 0}">
+                        <div class="text-center">
+                            <button (click) = "deleteFunction(i , j)" type="button" class="btn btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z">
+                                    </path>
+                                </svg>
+                                <span class="visually-hidden">Button</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="i != 0 && j != 0">
+                    <div class="tablecell">
+                        <a class="text-center text-break" (click)="openModal(textEdit)">
+                            <div [style.font-family]="array[i][j].font" [style.color]="array[i][j].color">
+                                {{array[i][j].text}}
+                            </div>
+                        </a>
+
+                        <ng-template #textEdit>
+                            <div class="modal-header">
+                                <h4 class="modal-title pull-left">Edit text</h4>
+                                <button type="button" class="btn-close close pull-right" aria-label="Close"
+                                    (click)="modalRef?.hide()">
+                                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row g-3 align-items-center mb-1">
+                                    <div class="col-auto">
+                                        <label class="form-label">Text color:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input (ngModel)="array[i][j].color" [(colorPicker)]="array[i][j].color"
+                                            [style.background]="array[i][j].color" />
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 align-items-center mb-1">
+                                    <div class="col-auto">
+                                        <label class="form-label">Font:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <ngx-select [items]="fonts" [(ngModel)]="array[i][j].font" [allowClear]="true">
+                                        </ngx-select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-1">
+                                    <label class="form-label">Text:</label>
+                                    <textarea class="form-control" rows="4" [(ngModel)]="array[i][j].text"></textarea>
+                                </div>
+
+                                <button type="button" class="btn btn-primary"
+                                    (click)="saveEditedText(i , j)">Save</button>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
