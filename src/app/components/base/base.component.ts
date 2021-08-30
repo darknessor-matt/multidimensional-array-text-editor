@@ -12,10 +12,13 @@ export class BaseComponent implements OnInit {
 
   modalRef?: BsModalRef;
 
-  rows = 2
-  cols = 2
+  rows = 3
+  cols = 6
+
+  dummyArray: number[] = []
 
   array: TextFieldItem[][] = []
+  showSidebar = false;
 
   fonts = ["Arial, Helvetica, sans-serif",
     "'Courier New', Courier, monospace",
@@ -23,7 +26,13 @@ export class BaseComponent implements OnInit {
 
 
   constructor(private modalService: BsModalService) {
+    for (let index = 0; index < 1510; index++) {
+      this.dummyArray[index] = Math.floor(Math.random() * 120);
+    }
+  }
 
+  sidebar() {
+    this.showSidebar = !this.showSidebar
   }
 
   openModal(template: TemplateRef<any>) {
@@ -45,7 +54,7 @@ export class BaseComponent implements OnInit {
       this.array[i] = [];
       for (var j: number = 0; j < this.cols + 1; j++) {
         this.array[i][j] = {
-          text: "row: " + i + " | col: " + j,
+          text: "",
           font: "Arial, Helvetica, sans-serif",
           color: "#FFFFFF"
         };

@@ -1,4 +1,5 @@
-<div class="rounded p-2" style="background-color: lightsalmon;">
+<app-popup-sidebar [show] = "showSidebar" [items] = "dummyArray"></app-popup-sidebar>
+<div class="rounded p-3 m-2" style="background-color: lightsalmon;">
     <h2>Table text editor</h2>
     <div class="row">
         <form (ngSubmit)="createArray()">
@@ -6,17 +7,20 @@
                 <div class="col-auto">
                     <label class="col-form-label">Rows</label>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <input type="number" min="1" [(ngModel)]="rows" name="rows" class="form-control">
                 </div>
                 <div class="col-auto">
                     <label class="col-form-label">Columns</label>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <input type="number" min="1" [(ngModel)]="cols" name="cols" class="form-control">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-primary" (click) = "sidebar()">Side bar</button>
                 </div>
             </div>
         </form>
@@ -46,10 +50,11 @@
                 </div>
 
                 <div *ngIf="i != 0 && j != 0">
-                    <div class="tablecell">
-                        <a class="text-center text-break" (click)="openModal(textEdit)">
+                    <div class="tablecell rounded">
+                        <a class="text-center" (click)="openModal(textEdit)">
                             <div [style.font-family]="array[i][j].font" [style.color]="array[i][j].color">
                                 {{array[i][j].text}}
+                                &nbsp;
                             </div>
                         </a>
 

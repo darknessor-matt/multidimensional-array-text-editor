@@ -1,0 +1,14 @@
+<div [@slideToRight] = "show ? 'show' : 'hidden'" style="position: fixed; left: 0;">
+    <div class="rounded" style="width: 250px; height: 500px; background-color: lightsalmon;">
+
+        <div class="row">
+            <div class="col-xs-12 col-12">
+              <div class="content-wrapper">
+                <p class="content-item" *ngFor="let item of items">{{item}}</p>
+              </div>
+              <pagination [totalItems]="items.length" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+
+    </div>
+</div>

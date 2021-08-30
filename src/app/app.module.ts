@@ -10,11 +10,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { PopupSidebarComponent } from './components/popup-sidebar/popup-sidebar.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BaseComponent
+    BaseComponent,
+    PopupSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { NgxSelectModule } from 'ngx-select-ex';
     FormsModule,
     ModalModule.forRoot(),
     ColorPickerModule,
-    NgxSelectModule
+    NgxSelectModule,
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
